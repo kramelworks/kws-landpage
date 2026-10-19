@@ -1,253 +1,1102 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="KramelWorks — empresa de tecnologia responsável pelo krameldocs, uma plataforma de documentação técnica.">
-  <meta name="theme-color" content="#0f172a">
-  <title>KramelWorks | Tecnologia e krameldocs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="KramelWorks — desenvolvimento de software e soluções digitais. Conheça nossos projetos e produtos."
+  >
+  <meta name="theme-color" content="#0b1020">
+
+  <title>KramelWorks — Engenharia de software e soluções digitais</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
+    :root {
+      color-scheme: dark;
+      --background: #0b1020;
+      --surface: #11182a;
+      --surface-hover: #151e32;
+      --foreground: #f4f7ff;
+      --muted: #9ba8bf;
+      --border: rgba(148, 163, 184, 0.16);
+      --accent: #6ea8fe;
+      --accent-strong: #8bb9ff;
+      --accent-soft: rgba(110, 168, 254, 0.1);
+      --max-width: 1160px;
+    }
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      margin: 0;
+      min-width: 320px;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    header {
-      padding: 28px 20px;
-      text-align: center;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .logo-circle {
-      width: 120px;
-      height: 120px;
-      background: #fff;
-      border-radius: 50%;
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 16, 32, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      min-height: 78px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      display: block;
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+      border-radius: 11px;
+    }
+
+    .brand-name {
+      font-family: "Manrope", sans-serif;
+      font-size: 1.03rem;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+    }
+
+    .brand-name span {
+      color: var(--accent);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .desktop-nav a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 180ms ease;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--foreground);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      margin: 0 auto;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 17px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition:
+        background 180ms ease,
+        border-color 180ms ease;
     }
 
-    .logo-circle img {
-      width: 82px;
-      height: auto;
+    .nav-cta:hover {
+      background: var(--surface);
+      border-color: rgba(110, 168, 254, 0.45);
     }
 
-    main {
-      width: 100%;
-      max-width: 850px;
-      margin: auto;
-      padding: 30px 24px 70px;
-      text-align: center;
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 112px 0 100px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -280px;
+      right: -180px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(63, 116, 220, 0.15),
+        rgba(63, 116, 220, 0.035) 45%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: center;
+      gap: 72px;
     }
 
     .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      margin-bottom: 22px;
-      border: 1px solid rgba(249, 115, 22, 0.45);
-      border-radius: 999px;
-      color: #fdba74;
-      font-size: 0.85rem;
-      font-weight: bold;
-      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+      color: var(--accent-strong);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Manrope", sans-serif;
     }
 
     h1 {
-      font-size: clamp(2.3rem, 6vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 24px;
+      max-width: 750px;
+      margin-bottom: 25px;
+      font-size: clamp(2.8rem, 5.7vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.075em;
+      line-height: 1.07;
     }
 
-    h1 span {
-      color: #f97316;
+    h1 .highlight {
+      color: var(--accent-strong);
     }
 
-    .intro {
-      max-width: 680px;
-      margin: 0 auto 20px;
-      color: #cbd5e1;
-      font-size: 1.15rem;
-      line-height: 1.8;
+    .hero-description {
+      max-width: 600px;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.85;
     }
 
-    .product-card {
-      max-width: 620px;
-      margin: 38px auto 30px;
-      padding: 30px 26px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 18px;
-      text-align: left;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
     }
 
-    .product-label {
-      color: #fb923c;
-      font-size: 0.8rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 12px;
-    }
-
-    .product-card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 14px;
-    }
-
-    .product-card p {
-      color: #cbd5e1;
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .cta-button {
-      background: #f97316;
-      color: #fff;
-      padding: 13px 23px;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
+    .button {
+      display: inline-flex;
+      min-height: 49px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      border: 1px solid transparent;
       border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      text-decoration: none;
-      display: inline-block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
     }
 
-    .cta-button:hover {
-      background: #ea580c;
+    .button:hover {
       transform: translateY(-2px);
     }
 
-    .secondary-link {
+    .button-primary {
+      background: var(--accent);
+      color: #091326;
+    }
+
+    .button-primary:hover {
+      background: #91bdff;
+    }
+
+    .button-secondary {
+      border-color: var(--border);
+      color: var(--foreground);
+    }
+
+    .button-secondary:hover {
+      background: var(--surface);
+      border-color: rgba(148, 163, 184, 0.35);
+    }
+
+    .arrow {
       display: inline-block;
-      margin: 8px 0 0 14px;
-      color: #e2e8f0;
-      text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 1.15em;
+      transition: transform 180ms ease;
     }
 
-    .secondary-link:hover {
-      color: #fb923c;
+    a:hover .arrow {
+      transform: translateX(3px);
     }
 
-    footer {
-      padding: 22px 20px;
-      text-align: center;
-      color: #94a3b8;
-      font-size: 0.85rem;
+    .hero-visual {
+      position: relative;
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-orbit {
+      position: absolute;
+      width: min(100%, 355px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(110, 168, 254, 0.16);
+      border-radius: 50%;
+    }
+
+    .visual-orbit::before,
+    .visual-orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(110, 168, 254, 0.12);
+      border-radius: 50%;
+      inset: 30px;
+    }
+
+    .visual-orbit::after {
+      inset: 65px;
+    }
+
+    .visual-card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 310px);
+      padding: 26px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 16px;
+      background: linear-gradient(
+        145deg,
+        rgba(25, 36, 58, 0.97),
+        rgba(15, 23, 42, 0.98)
+      );
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.3);
+      transform: rotate(-2deg);
+    }
+
+    .visual-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #52617a;
+    }
+
+    .window-label {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
+    .visual-card h2 {
+      margin: 23px 0 6px;
+      font-size: 1.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .visual-card > p {
+      margin-bottom: 23px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .code-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 13px;
+      color: #c8d5eb;
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    .code-line::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      flex-shrink: 0;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    .code-line.muted {
+      color: #7585a0;
+    }
+
+    .section {
+      padding: 94px 0;
+    }
+
+    .section-heading {
+      max-width: 690px;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      margin-bottom: 13px;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.065em;
+      line-height: 1.17;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1rem;
       line-height: 1.8;
     }
 
-    footer strong {
-      color: #cbd5e1;
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
     }
 
-    @media (max-width: 480px) {
-      header {
-        padding-top: 24px;
+    .principle-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(17, 24, 42, 0.52);
+      transition:
+        transform 200ms ease,
+        border-color 200ms ease,
+        background 200ms ease;
+    }
+
+    .principle-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(110, 168, 254, 0.3);
+      background: var(--surface);
+    }
+
+    .principle-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(110, 168, 254, 0.23);
+      border-radius: 9px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+
+    .principle-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      letter-spacing: -0.035em;
+    }
+
+    .principle-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .products-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(17, 24, 42, 0.42);
+    }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--background);
+    }
+
+    .product-content {
+      padding: clamp(28px, 5vw, 54px);
+    }
+
+    .product-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 24px;
+      color: var(--accent-strong);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .product-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    .product-content h3 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.065em;
+      line-height: 1.15;
+    }
+
+    .product-content > p {
+      max-width: 570px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.85;
+    }
+
+    .product-features {
+      display: grid;
+      gap: 12px;
+      margin: 0 0 30px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .product-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      color: #c9d4e6;
+      font-size: 0.9rem;
+    }
+
+    .check {
+      flex-shrink: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .product-art {
+      position: relative;
+      display: grid;
+      min-height: 350px;
+      place-items: center;
+      overflow: hidden;
+      border-left: 1px solid var(--border);
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(70, 125, 231, 0.17),
+          transparent 65%
+        ),
+        #0e1526;
+    }
+
+    .product-art::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(110, 168, 254, 0.16);
+      border-radius: 50%;
+    }
+
+    .product-art::after {
+      content: "";
+      position: absolute;
+      width: 225px;
+      height: 225px;
+      border: 1px solid rgba(110, 168, 254, 0.13);
+      border-radius: 50%;
+    }
+
+    .product-symbol {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 116px;
+      height: 116px;
+      place-items: center;
+      border: 1px solid rgba(147, 190, 255, 0.36);
+      border-radius: 27px;
+      background: linear-gradient(
+        145deg,
+        #253f6b,
+        #111d35
+      );
+      box-shadow:
+        0 0 80px rgba(65, 127, 236, 0.16),
+        0 24px 55px rgba(0, 0, 0, 0.35);
+      color: #b9d5ff;
+      font-family: "Manrope", sans-serif;
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: -0.1em;
+    }
+
+    .contact-section {
+      padding: 78px 0;
+    }
+
+    .contact-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background:
+        linear-gradient(
+          115deg,
+          rgba(110, 168, 254, 0.09),
+          transparent 75%
+        ),
+        var(--surface);
+    }
+
+    .contact-panel h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      letter-spacing: -0.06em;
+    }
+
+    .contact-panel p {
+      max-width: 570px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.8;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+
+    .footer-brand p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.83rem;
+      transition: color 180ms ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--foreground);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 17px;
+      padding-bottom: 17px;
+      border-top: 1px solid var(--border);
+      color: #77849c;
+      font-size: 0.76rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        padding: 80px 0;
       }
 
-      .logo-circle {
-        width: 100px;
-        height: 100px;
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
       }
 
-      .logo-circle img {
-        width: 68px;
+      .hero-visual {
+        min-height: 300px;
       }
 
-      main {
-        padding: 24px 18px 45px;
+      .visual-orbit {
+        width: 300px;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principle-card {
+        padding: 24px;
       }
 
       .product-card {
-        padding: 24px 20px;
+        grid-template-columns: 1fr;
       }
 
-      .secondary-link {
-        margin: 18px 0 0;
-        display: block;
+      .product-art {
+        min-height: 270px;
+        border-top: 1px solid var(--border);
+        border-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(var(--max-width), calc(100% - 36px));
+      }
+
+      .header-inner {
+        min-height: 68px;
+      }
+
+      .brand img {
+        width: 37px;
+        height: 37px;
+      }
+
+      .desktop-nav {
+        gap: 15px;
+      }
+
+      .desktop-nav .nav-link {
+        display: none;
+      }
+
+      .nav-cta {
+        min-height: 38px;
+        padding-inline: 12px;
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        padding: 66px 0 55px;
+      }
+
+      h1 {
+        font-size: clamp(2.55rem, 12vw, 3.6rem);
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 275px;
+      }
+
+      .visual-card {
+        width: min(100%, 290px);
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 30px;
+      }
+
+      .product-content {
+        padding: 27px 23px;
+      }
+
+      .product-art {
+        min-height: 245px;
+      }
+
+      .contact-section {
+        padding: 55px 0;
+      }
+
+      .contact-panel {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .footer-main,
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-main {
+        gap: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="logo-circle">
-      <img
-        src="70133ebb-ae0e-413e-baa1-ae386f3fbea0.png"
-        alt="Logo da KramelWorks"
-      >
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="KramelWorks — início">
+        <img
+          src="70133ebb-ae0e-413e-baa1-ae386f3fbea0.png"
+          alt=""
+          width="43"
+          height="43"
+        >
+        <span class="brand-name">Kramel<span>Works</span></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a class="nav-link" href="#empresa">Empresa</a>
+        <a class="nav-link" href="#produtos">Produtos</a>
+        <a class="nav-cta" href="#contato">
+          Entre em contato
+          <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <span class="eyebrow">Tecnologia, ideias e inovação</span>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Engenharia de software</div>
 
-    <h1>
-      Construindo o futuro com a <span>KramelWorks</span>
-    </h1>
+          <h1>
+            Tecnologia com propósito.
+            <span class="highlight">Soluções que evoluem.</span>
+          </h1>
 
-    <p class="intro">
-      A KramelWorks desenvolve soluções tecnológicas para transformar
-      ideias em produtos digitais. Nosso objetivo é criar ferramentas
-      úteis, práticas e preparadas para evoluir.
-    </p>
+          <p class="hero-description">
+            A KramelWorks desenvolve produtos digitais e soluções de
+            software com foco em clareza, confiabilidade e evolução
+            contínua. Transformamos ideias em ferramentas úteis para
+            o mundo real.
+          </p>
 
-    <section class="product-card" aria-labelledby="product-title">
-      <div class="product-label">Um produto KramelWorks</div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#produtos">
+              Conheça nossos produtos
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
 
-      <h2 id="product-title">Conheça o krameldocs</h2>
+            <a class="button button-secondary" href="#empresa">
+              Sobre a KramelWorks
+            </a>
+          </div>
+        </div>
 
-      <p>
-        O krameldocs é uma plataforma de documentação desenvolvida pela
-        KramelWorks para organizar e apresentar conteúdos técnicos de
-        maneira clara, estruturada e acessível.
-      </p>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-orbit"></div>
 
-      <a
-        class="cta-button"
-        href="https://docs.kramelworks.com.br"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Conhecer o krameldocs
-      </a>
+          <div class="visual-card">
+            <div class="visual-card-top">
+              <div class="window-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span class="window-label">KRAMELWORKS / STUDIO</span>
+            </div>
+
+            <h2>Ideias em construção.</h2>
+            <p>Projetando soluções digitais com intenção.</p>
+
+            <div class="code-line">pensar com clareza</div>
+            <div class="code-line">construir com propósito</div>
+            <div class="code-line muted">evoluir continuamente</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <p class="intro">
-      Estamos construindo e aprimorando nossas soluções continuamente.
-      Este é apenas o começo.
-    </p>
+    <section class="section" id="empresa">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Nossa abordagem</div>
+
+          <h2>
+            Software bem pensado começa com os problemas certos.
+          </h2>
+
+          <p>
+            Acreditamos que bons produtos não dependem apenas de
+            tecnologia. Eles precisam de decisões conscientes,
+            arquitetura consistente e atenção à experiência de quem usa.
+          </p>
+        </div>
+
+        <div class="principles-grid">
+          <article class="principle-card">
+            <div class="principle-number">01</div>
+            <h3>Clareza por princípio</h3>
+            <p>
+              Organizamos ideias, informações e processos para criar
+              experiências digitais fáceis de compreender e utilizar.
+            </p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-number">02</div>
+            <h3>Engenharia consistente</h3>
+            <p>
+              Valorizamos código organizado, decisões técnicas
+              fundamentadas e soluções preparadas para manutenção
+              e evolução.
+            </p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-number">03</div>
+            <h3>Evolução contínua</h3>
+            <p>
+              Desenvolvemos de forma incremental, buscando aprimorar
+              a utilidade, a confiabilidade e a qualidade dos produtos.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products-section" id="produtos">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Nossos produtos</div>
+
+          <h2>
+            Ferramentas criadas para resolver problemas reais.
+          </h2>
+
+          <p>
+            Conheça os projetos desenvolvidos no ecossistema
+            KramelWorks.
+          </p>
+        </div>
+
+        <article class="product-card">
+          <div class="product-content">
+            <div class="product-label">Produto KramelWorks</div>
+
+            <h3>krameldocs</h3>
+
+            <p>
+              Uma plataforma de documentação técnica que organiza
+              conhecimento em uma estrutura clara, navegável e
+              acessível. Projetada para tornar informações técnicas
+              mais fáceis de encontrar, compreender e manter.
+            </p>
+
+            <ul class="product-features">
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                Conteúdo organizado em uma navegação hierárquica
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                Documentação em Markdown integrada ao GitHub
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                Estrutura preparada para evolução contínua
+              </li>
+            </ul>
+
+            <a
+              class="button button-primary"
+              href="https://docs.kramelworks.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Acessar documentação
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="product-art" aria-hidden="true">
+            <div class="product-symbol">K.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contato">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <h2>Vamos construir algo relevante.</h2>
+            <p>
+              A KramelWorks está em constante evolução.
+              Acompanhe nossos produtos e conheça o que estamos
+              desenvolvendo.
+            </p>
+          </div>
+
+          <a
+            class="button button-secondary"
+            href="https://docs.kramelworks.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Conhecer o projeto
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>
-      © <span id="year">2026</span> <strong>KramelWorks</strong>.
-      Todos os direitos reservados.
-    </p>
-    <p>krameldocs é um produto da KramelWorks.</p>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio">
+          <img
+            src="70133ebb-ae0e-413e-baa1-ae386f3fbea0.png"
+            alt=""
+            width="43"
+            height="43"
+            loading="lazy"
+          >
+          <span class="brand-name">Kramel<span>Works</span></span>
+        </a>
+
+        <p>Engenharia de software e soluções digitais.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Links do rodapé">
+        <a href="#empresa">Empresa</a>
+        <a href="#produtos">Produtos</a>
+        <a href="https://docs.kramelworks.com.br"
+           target="_blank"
+           rel="noopener noreferrer">
+          Documentação ↗
+        </a>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>
+        © <span id="year">2026</span> KramelWorks.
+        Todos os direitos reservados.
+      </span>
+      <span>Feito com propósito.</span>
+    </div>
   </footer>
 
   <script>
     document.getElementById("year").textContent =
-      new Date().getFullYear();
+      String(new Date().getFullYear());
   </script>
 </body>
 </html>
